@@ -58,7 +58,7 @@
 </template>
 
 <script>
-//import axios from "axios";
+import axios from 'axios';
 export default {
   name: "dnd-clases-comp",
 
@@ -97,9 +97,9 @@ export default {
     loadClase(cindex){
       let clase = null;
 
-      fetch(this.apiClassUrl + cindex)
-        .then((response) => response.json())
-        .then((data) => {
+      axios.get(this.apiClassUrl + cindex)
+        // .then((response) => response.json())
+        .then(({data}) => {
           //console.log(data);
           return data;
         })
@@ -114,8 +114,12 @@ export default {
   created() {
     if (this.$store.state.listaDndClases.length > 0) return;
 
-    fetch(this.apiClassUrl)
-      .then((response) => response.json())
+    axios.get(this.apiClassUrl)
+      // .then((response) => response.json())
+        .then(({data}) => {
+          //console.log(data);
+          return data;
+        })
       .then(({ results }) => {
         //console.log("Resultados: ");console.log(results);
         //let indexes = results.map((r) => r.index);
